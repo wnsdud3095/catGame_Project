@@ -91,4 +91,9 @@ public class PlayerController : MonoBehaviour
         SceneManager.LoadScene("Stage1");
     }
 
+    void aa()
+    {
+
+    }
+
 }
