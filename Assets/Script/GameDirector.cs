@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class GameDirector : MonoBehaviour
 {
-    public int myMoney = 0;
+    public int myMoney ;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        myMoney = 900;
     }
 
     // Update is called once per frame
