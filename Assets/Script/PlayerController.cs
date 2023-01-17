@@ -59,6 +59,13 @@ public class PlayerController : MonoBehaviour
         if (dir == 0)
             anim.SetBool("walk", false);
 
+
+
+        if (isGround)
+            anim.SetTrigger("isGround");
+
+
+
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             this.anim.SetTrigger("jump");
@@ -66,6 +73,8 @@ public class PlayerController : MonoBehaviour
         }
         if (dir != 0)
             transform.localScale = new Vector3(dir *2, 2, 1);
+
+
 
         if (this.rigid2D.velocity.y == 0) // 점프중이 아니면 재생속도를 이동속도에 맞추고
         {

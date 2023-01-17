@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class DecorateController : MonoBehaviour
 {
     GameObject Cat;
-    GameObject decoratePanel;
+    public GameObject decoratePanel;
+    public GameObject Inventory;
+
 
     // Start is called before the first frame update
     void Start()
     {
         this.Cat = GameObject.Find("decorateCat");
-        this.decoratePanel = GameObject.Find("decoratePanel");
+        Inventory.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,5 +35,10 @@ public class DecorateController : MonoBehaviour
 
     }
 
+    public void decorateStart()
+    {
+        Cat.GetComponent<RectTransform>().Translate(-300, 0, 0);
+        Inventory.SetActive(true);
+    }
 
 }
