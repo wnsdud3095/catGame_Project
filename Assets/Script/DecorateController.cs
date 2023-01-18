@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class DecorateController : MonoBehaviour
 {
-    GameObject Cat;
+    public GameObject Cat;
     public GameObject decoratePanel;
     public GameObject Inventory;
-
+    public Slot[] slots; // 만들어둔 Slot클래스 타입으로 슬롯 오브젝트를 넣을 배열을 만듬
+    public Transform slotHolder; // 슬롯들을 모아두는 변수 선언
 
     // Start is called before the first frame update
     void Start()
     {
-        this.Cat = GameObject.Find("decorateCat");
+
+        slots= slotHolder.GetComponentsInChildren<Slot>();
         Inventory.SetActive(false);
+
+
     }
 
     // Update is called once per frame
@@ -31,14 +35,35 @@ public class DecorateController : MonoBehaviour
 
     public void panelClose()
     {
-        decoratePanel.SetActive(false);
+        if (Inventory.activeInHierarchy == true)
+        {
+            Inventory.SetActive(false);
+            Cat.GetComponent<RectTransform>().Translate(480, 0, 0);
+
+        }
+        else decoratePanel.SetActive(false);
+
 
     }
 
+
     public void decorateStart()
     {
-        Cat.GetComponent<RectTransform>().Translate(-300, 0, 0);
+
+        Cat.GetComponent<RectTransform>().Translate(-480, 0, 0);
         Inventory.SetActive(true);
+        decorateIV.Instance.AddItem(ItemDataBase.Instance.itemDB[0]);
+
+        RedrawSlotUI();
+    }
+
+    public void RedrawSlotUI()
+    {
+        for(int i =0; i<decorateIV.Instance.items.Count;i++)
+        {
+            slots[i].item = decorateIV.Instance.items[i];
+            slots[i].UpdataSlot();
+        }
     }
 
 }
