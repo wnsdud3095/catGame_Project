@@ -8,9 +8,7 @@ public class Slot : MonoBehaviour
 {
     public Item item;
     public Image itemIcon;
-    public GameObject Hat;
-    public Image Body;
-    public Image Pants;
+
 
     // Start is called before the first frame update
 
@@ -27,9 +25,11 @@ public class Slot : MonoBehaviour
 
     }
 
-    public void Wear()
+    public void OnClick()
     {
-        Hat.GetComponent<Image>().sprite = item.itemImage;
+        GameObject.Find("door").GetComponent<DecorateController>().WearItem = item;
     }
+
+
 
 }
