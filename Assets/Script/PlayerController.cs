@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 boxSize;
     public void Attack()
     {
+        this.anim.SetTrigger("atk");
         Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(boxPos.position, boxSize, 0);
         foreach(Collider2D collider in collider2Ds)
         {
