@@ -7,11 +7,17 @@ using System.Runtime.Versioning;
 
 public class UGUIdirector : MonoBehaviour
 {
-    public TextMeshProUGUI money; // TMP타입으로 text오브젝트를 선언
     public TextMeshProUGUI windowText;
+    public TextMeshProUGUI resourceText;
     int myMoney;
+    int wood = 10;
+    int paper = 10;
+    int stone = 10;
     public GameObject window;
+    public GameObject resourceCheck;
     public bool windowActive = false;
+    public bool resourceActive = false;
+
     sbyte textNum;
 
 
@@ -28,7 +34,7 @@ public class UGUIdirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        money.text = "보유 자원 :" + this.myMoney;
+        //money.text = "보유 자원 :" + this.myMoney;
 
         switch (textNum)
         {
@@ -43,9 +49,16 @@ public class UGUIdirector : MonoBehaviour
                     break ;
                 }
         }
+
+        resourceText.text = "나무 : " + wood + "\n박스 조각 : " + paper + "\n돌맹이 : " + stone;
         
     }
 
+    public void resoruceOnOff()
+    {
+        resourceActive = !resourceActive;
+        resourceCheck.SetActive(resourceActive);
+    }
     
 
     public void windowOnOff()

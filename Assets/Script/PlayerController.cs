@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+//using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement; // 씬을 관리할 수 있음
@@ -37,9 +37,36 @@ public class PlayerController : MonoBehaviour
         this.anim = GetComponent<Animator>();
     }
 
+    public Transform boxPos;
+    public Vector2 boxSize;
+    public void Attack()
+    {
+        Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(boxPos.position, boxSize, 0);
+        foreach(Collider2D collider in collider2Ds)
+        {
+            
+            if (collider.tag == "Enemy")
+            {
+                collider.GetComponent<Enemy>().GetDamage(1);
+            }
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(boxPos.position, boxSize);
+    }
+
     // Update is called once per frame
     void Update()
     {
+      
+
+
+
+
         isGround = Physics2D.OverlapCircle(pos.position, checkRadius, islayer); // (Vector2, float radius, int layer) 위치에 반지름 크기의 원을 만들어 원 안에 존재하는 충동체 (Collider)를 가진 오브젝트를 검사
                                                                                 // 레이어마스크를 매개변수로 전달시 해당 레이어 마스크가 있는지 검사후 참 거짓 반환
 
@@ -93,16 +120,17 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    /*
     void OnTriggerEnter2D(Collider2D other) //콜리더와 충돌한 순간 호출되는 메서드 매개변수에는 충돌한 오브젝트가 들어감
     {
        // Debug.Log(other);
        // Debug.Log(other);
         SceneManager.LoadScene("Stage1");
     }
+    */
 
-    void aa()
-    {
+    
 
-    }
+
 
 }

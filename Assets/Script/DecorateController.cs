@@ -17,7 +17,10 @@ public class DecorateController : MonoBehaviour
     public GameObject Hat;
     public GameObject Body;
     public GameObject Pants;
+    public GameObject inClosetButton;
 
+    public Sprite[] catSP = new Sprite[4];
+    int CurrentSp = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -35,9 +38,12 @@ public class DecorateController : MonoBehaviour
         
     }
 
-    private void OnMouseDown() // 클릭시 호출되는 함수 오브젝트에 콜라이더가 있어야 작동함
+
+
+    public void panelOpen() // 클릭시 호출되는 함수 오브젝트에 콜라이더가 있어야 작동함
     {
         decoratePanel.SetActive(true);
+        inClosetButton.SetActive(false);
     }
 
     public void panelClose()
@@ -105,12 +111,63 @@ public class DecorateController : MonoBehaviour
 
     }
 
+    public void turnLeft()
+    {
+    
+
+        CurrentSp--;
+        if(CurrentSp < 0)
+        {
+            CurrentSp = 3;
+        }
+        Cat.GetComponent<Image>().sprite = catSP[CurrentSp] ;
+    }
+
+    public void turnRight()
+    {
+        CurrentSp++;
+        if(CurrentSp >3) 
+        {
+            CurrentSp = 0;
+        }
+        Cat.GetComponent<Image>().sprite = catSP[CurrentSp];
+    }
+
     public void UnWear()
     {
-        Hat.SetActive(false);
-        Body.SetActive(false);
-        Pants.SetActive(false);
+        
+        
+        
+        if (WearItem.itemType == ItemType.Hat)
+        {
+            Hat.SetActive(false);
+        }
+        else if (WearItem.itemType == ItemType.Body)
+        {
+            Body.SetActive(false);
+
+        }
+        else if (WearItem.itemType == ItemType.Pants)
+        {
+            Pants.SetActive(false);
+        }
+    }
+
+
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+
+        if (decoratePanel.activeInHierarchy == false)
+        {
+            inClosetButton.SetActive(true);
+        }
 
     }
 
+    void OnTriggerExit2D(Collider2D other)
+    {
+
+        inClosetButton.SetActive(false);
+    }
 }
